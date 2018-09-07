@@ -128,6 +128,9 @@ class StockPickingPackagePreparation(models.Model):
     date_transport_start = fields.Datetime(
         string="Transport Start"
     )
+    client_order_ref = fields.Text(
+        string="Client Order Ref",
+    )
 
     @api.multi
     @api.depends('picking_ids',
@@ -344,6 +347,7 @@ class StockPickingPackagePreparation(models.Model):
             'weight': self.weight,
             'gross_weight': self.gross_weight,
             'volume': self.volume,
+            'ddt_client_order_ref': self.client_order_ref,
         })
         return res
 
@@ -536,8 +540,8 @@ class StockPickingPackagePreparationLine(models.Model):
         for line in lines:
             sale_line = False
             if line['move_id']:
-                move = self.env['stock.move'].browse(line['move_id'])
-                sale_line = move.sale_line_id or False
+                move_line = self.env['stock.move.line'].browse(line['move_id'])
+                sale_line = move_line.move_id.sale_line_id or False
             if sale_line:
                 line['price_unit'] = sale_line.price_unit or 0
                 line['discount'] = sale_line.discount or 0
