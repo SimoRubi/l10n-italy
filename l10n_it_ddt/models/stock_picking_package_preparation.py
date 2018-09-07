@@ -210,20 +210,19 @@ class StockPickingPackagePreparation(models.Model):
             if prep.name:
                 name = prep.name
             if prep.ddt_number and prep.name:
-                name = '[%s] %s' % (prep.name, prep.ddt_number)
+                name = f"[{prep.name}] {prep.ddt_number}"
             if prep.ddt_number and not prep.name:
                 name = prep.ddt_number
             if not name:
-                name = '%s - %s' % (prep.partner_id.name, prep.date)
+                name = f"{prep.partner_id.name} - {prep.date}"
             prep.display_name = name
 
     @api.multi
     @api.depends('package_id',
-                 'package_id.children_ids',
                  'package_id.quant_ids',
                  'picking_ids',
                  'picking_ids.move_lines',
-                 'picking_ids.move_lines.quant_ids',
+                 'picking_ids.move_lines.quantity_done',
                  'weight_manual')
     def _compute_weight(self):
         super(StockPickingPackagePreparation, self)._compute_weight()
@@ -231,13 +230,13 @@ class StockPickingPackagePreparation(models.Model):
             if prep.weight_manual:
                 prep.weight = prep.weight_manual
             elif not prep.package_id:
-                quants = self.env['stock.quant']
+                stock_moves = []
                 for picking in prep.picking_ids:
-                    for line in picking.move_lines:
-                        for quant in line.quant_ids:
-                            if quant.qty >= 0:
-                                quants |= quant
-                weight = sum(l.product_id.weight * l.qty for l in quants)
+                    for move in picking.move_lines:
+                        if move.quantity_done > 0:
+                            stock_moves.append(move)
+                weight = sum(sm.product_id.weight * sm.quantity_done
+                             for sm in stock_moves)
                 prep.net_weight = weight
                 prep.weight = weight
 
@@ -248,8 +247,8 @@ class StockPickingPackagePreparation(models.Model):
         sale_order = False
         for picking in self.picking_ids:
             for sm in picking.move_lines:
-                if sm.procurement_id and sm.procurement_id.sale_line_id:
-                    sale_order = sm.procurement_id.sale_line_id.order_id
+                if sm.sale_line_id:
+                    sale_order = sm.sale_line_id.order_id
                     return sale_order
         return sale_order
 
@@ -449,7 +448,7 @@ class StockPickingPackagePreparationLine(models.Model):
     _inherit = 'stock.picking.package.preparation.line'
 
     sale_line_id = fields.Many2one(
-        related='move_id.procurement_id.sale_line_id',
+        related='move_id.move_id.sale_line_id',
         string='Sale order line',
         store=True, readonly=True)
     price_unit = fields.Float('Unit Price', digits=dp.get_precision(
@@ -522,13 +521,13 @@ class StockPickingPackagePreparationLine(models.Model):
         """
         Add values used for invoice creation
         """
-        lines = super(StockPickingPackagePreparationLine, self).\
+        lines = super(StockPickingPackagePreparationLine, self). \
             _prepare_lines_from_pickings(picking_ids)
         for line in lines:
             sale_line = False
             if line['move_id']:
                 move = self.env['stock.move'].browse(line['move_id'])
-                sale_line = move.procurement_id.sale_line_id or False
+                sale_line = move.sale_line_id or False
             if sale_line:
                 line['price_unit'] = sale_line.price_unit or 0
                 line['discount'] = sale_line.discount or 0
@@ -584,10 +583,10 @@ class StockPickingPackagePreparationLine(models.Model):
                 account = fpos.map_account(account)
             res['account_id'] = account.id
 
-            if self.sale_line_id.order_id.project_id:
+            if self.sale_line_id.order_id.analytic_account_id:
                 res[
                     'account_analytic_id'
-                ] = self.sale_line_id.order_id.project_id.id
+                ] = self.sale_line_id.order_id.analytic_account_id.id
             if self.sale_line_id.analytic_tag_ids:
                 res['analytic_tag_ids'] = [
                     (6, 0, self.sale_line_id.analytic_tag_ids.ids)
@@ -628,19 +627,19 @@ class StockPickingPackagePreparationLine(models.Model):
                 self.env['account.invoice.line'].with_context(
                     skip_update_line_ids=True).create(vals)
 
-    def quantity_by_lot(self):
-        res = {}
-        for quant in self.move_id.quant_ids:
-            if quant.lot_id:
-                if quant.location_id.id == self.move_id.location_dest_id.id:
-                    if quant.lot_id not in res:
-                        res[quant.lot_id] = quant.qty
-                    else:
-                        res[quant.lot_id] += quant.qty
-        for lot in res:
-            if lot.product_id.tracking == 'lot':
-                res[lot] = formatLang(self.env, res[lot])
-            else:
-                # If not tracking by lots, quantity is not relevant
-                res[lot] = False
-        return res
+    # def quantity_by_lot(self):
+    #     res = {}
+    #     for quant in self.move_id.quant_ids:
+    #         if quant.lot_id:
+    #             if quant.location_id.id == self.move_id.location_dest_id.id:
+    #                 if quant.lot_id not in res:
+    #                     res[quant.lot_id] = quant.qty
+    #                 else:
+    #                     res[quant.lot_id] += quant.qty
+    #     for lot in res:
+    #         if lot.product_id.tracking == 'lot':
+    #             res[lot] = formatLang(self.env, res[lot])
+    #         else:
+    #             # If not tracking by lots, quantity is not relevant
+    #             res[lot] = False
+    #     return res
