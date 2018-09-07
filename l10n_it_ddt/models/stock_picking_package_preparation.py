@@ -125,6 +125,9 @@ class StockPickingPackagePreparation(models.Model):
     check_if_picking_done = fields.Boolean(
         compute='_compute_check_if_picking_done',
         )
+    date_transport_start = fields.Datetime(
+        string="Transport Start"
+    )
 
     @api.multi
     @api.depends('picking_ids',
@@ -441,6 +444,11 @@ class StockPickingPackagePreparation(models.Model):
                     _("Document {d} has invoice linked".format(
                         d=ddt.ddt_number)))
         return super(StockPickingPackagePreparation, self).unlink()
+
+    def get_date_for_ddt_report(self):
+        date = datetime.strptime(self.date, '%Y-%m-%d %H:%M:%S')
+        date_str = datetime.strftime(date, '%d/%m/%Y')
+        return date_str
 
 
 class StockPickingPackagePreparationLine(models.Model):

@@ -45,8 +45,10 @@
                         <div class="signature" t-field="ddt.carrier_id.name"></div>
                     </td>
                     <td>
-                        <h6>Date</h6>
-                        <div class="signature" t-field="ddt.date"></div>
+                        <h6>Transport Start Date</h6>
+                        <t t-if="ddt.date_transport_start">
+                            <div class="signature" t-field="ddt.date_transport_start"></div>
+                        </t>
                     </td>
                     <td>
                         <h6>Pick up time</h6>
@@ -104,6 +106,7 @@
                         </div>
                     </div>
                     <h1>DDT number: <span t-field="o.ddt_number"></span></h1>
+                    <h5>Date: <span t-esc="o.get_date_for_ddt_report()"></span></h5>
                     <table class="table table-condensed">
                         <t t-set="has_serial_number"
                            t-value="o.line_ids.filtered('move_id.lot_id')"
