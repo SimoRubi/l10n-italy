@@ -170,8 +170,8 @@ class StockPickingPackagePreparation(models.Model):
         ddt = self.search([('picking_ids', '=', picking.id)])
         if ddt:
             raise UserError(
-                _("Selected Picking is already linked to DDT: %s")
-                % ddt.display_name
+                _(f"Selected Picking is already linked to DDT:"
+                  f" {ddt.display_name}")
             )
 
     @api.multi
@@ -288,19 +288,6 @@ class StockPickingPackagePreparation(models.Model):
         """
         self.ensure_one()
         order = self._get_sale_order_ref()
-        if order:
-            # Most of the values will be overwritten below,
-            # but this preserves inheritance chain
-            res = order._prepare_invoice()
-        else:
-            # Initialise res with the fields in sale._prepare_invoice
-            # that won't be overwritten below
-            res = {
-                'type': 'out_invoice',
-                'partner_shipping_id':
-                    self.partner_id.address_get(['delivery'])['delivery'],
-                'company_id': self.company_id.id
-            }
         journal_id = self._context.get('invoice_journal_id', False)
         if not journal_id:
             journal_id = self.env['account.invoice'].default_get(
@@ -314,30 +301,29 @@ class StockPickingPackagePreparation(models.Model):
             order and order.partner_invoice_id.id or
             self.partner_id.address_get(['invoice'])['invoice'])
         invoice_partner = self.env['res.partner'].browse(invoice_partner_id)
-        invoice_description = self._prepare_invoice_description()
         currency_id = (
             order and order.pricelist_id.currency_id.id or
             journal.currency_id.id or journal.company_id.currency_id.id)
         payment_term_id = (
             order and order.payment_term_id.id or
             self.partner_id.property_payment_term_id.id)
-        fiscal_position_id = (
-            order and order.fiscal_position_id.id or
-            invoice_partner.property_account_position_id.id)
-        res.update({
+        invoice_description = self._prepare_invoice_description()
+        invoice_vals = {
             'name': invoice_description or '',
-            'origin': self.ddt_number,
             'date_invoice': self._context.get('invoice_date', False),
+            'origin': self.ddt_number,
+            'type': 'out_invoice',
             'account_id': (
                 invoice_partner.property_account_receivable_id.id),
             'partner_id': invoice_partner_id,
+            'partner_shipping_id': self.partner_id.id,
             'journal_id': journal_id,
             'currency_id': currency_id,
-            'fiscal_position_id': fiscal_position_id,
-            'payment_term_id': payment_term_id
-        })
-        # Now the rest of the fields dedicated to DDT
-        res.update({
+            # TO DO 'comment': self.note,
+            'payment_term_id': payment_term_id,
+            'fiscal_position_id': (
+                order and order.fiscal_position_id.id or
+                invoice_partner.property_account_position_id.id),
             'carriage_condition_id': self.carriage_condition_id.id,
             'goods_description_id': self.goods_description_id.id,
             'transportation_reason_id': self.transportation_reason_id.id,
@@ -348,8 +334,8 @@ class StockPickingPackagePreparation(models.Model):
             'gross_weight': self.gross_weight,
             'volume': self.volume,
             'ddt_client_order_ref': self.client_order_ref,
-        })
-        return res
+        }
+        return invoice_vals
 
     @api.multi
     def action_invoice_create(self):
@@ -360,6 +346,7 @@ class StockPickingPackagePreparation(models.Model):
         inv_obj = self.env['account.invoice']
         invoices = {}
         references = {}
+
         for ddt in self:
             if not ddt.to_be_invoiced or ddt.invoice_id:
                 continue
@@ -371,10 +358,10 @@ class StockPickingPackagePreparation(models.Model):
                 group_partner_invoice_id = order.partner_invoice_id.id
                 group_currency_id = order.currency_id.id
             else:
-                group_method = (
-                    ddt.partner_shipping_id.ddt_invoicing_group)
+                group_method = ddt.partner_shipping_id.ddt_invoicing_group
                 group_partner_invoice_id = ddt.partner_id.id
                 group_currency_id = ddt.partner_id.currency_id.id
+
             if group_method == 'billing_partner':
                 group_key = (group_partner_invoice_id,
                              group_currency_id)
@@ -578,13 +565,10 @@ class StockPickingPackagePreparationLine(models.Model):
                     account = invoice.journal_id.default_credit_account_id
             if not account:
                 raise UserError(
-                    _(
-                        'Please define income account for this product: "%s" '
-                        '(id:%d) - or for its category: "%s".'
-                    ) % (
-                        self.product_id.name, self.product_id.id,
-                        self.product_id.categ_id.name
-                    )
+                    _(f"Please define income account for this product:"
+                      f" \"{self.product_id.name}\" (id:{self.product_id.id})"
+                      f" - or for its category:"
+                      f" \"{self.product_id.categ_id.name}\"")
                 )
             fpos = None
             if self.sale_line_id:
