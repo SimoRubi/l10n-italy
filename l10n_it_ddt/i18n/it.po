@@ -123,6 +123,16 @@ msgid "Check if picking done"
 msgstr "Controlla se il picking è completato"
 
 #. module: l10n_it_ddt
+#: model:ir.model.fields,field_description:l10n_it_ddt.field_stock_picking_package_preparation_client_order_ref
+msgid "Client Order Ref"
+msgstr "Riferimento cliente"
+
+#. module: l10n_it_ddt
+#: model:ir.ui.view,arch_db:l10n_it_ddt.report_ddt
+msgid "Client Ref"
+msgstr "Riferimento Cliente"
+
+#. module: l10n_it_ddt
 #: model:ir.model.fields,field_description:l10n_it_ddt.field_res_partner_ddt_code_group
 #: model:ir.model.fields,field_description:l10n_it_ddt.field_res_users_ddt_code_group
 #: selection:res.partner,ddt_invoicing_group:0
@@ -185,6 +195,11 @@ msgstr "Creato il"
 #: model:ir.ui.view,arch_db:l10n_it_ddt.view_ddt_invoicing
 msgid "DDT"
 msgstr "DDT"
+
+#. module: l10n_it_ddt
+#: model:ir.model.fields,field_description:l10n_it_ddt.field_account_invoice_ddt_client_order_ref
+msgid "DDT Client Order Ref"
+msgstr "Riferimento cliente DDT"
 
 #. module: l10n_it_ddt
 #: model:ir.actions.act_window,name:l10n_it_ddt.action_ddt_create_invoice
@@ -559,6 +574,12 @@ msgstr "Non ci sono DDT da fatturare"
 #: selection:sale.order,ddt_invoicing_group:0
 msgid "One DDT - One Invoice"
 msgstr "Un DDT - Una fattura"
+
+#. module: l10n_it_ddt
+#: selection:res.partner,ddt_invoicing_group:0
+#: selection:sale.order,ddt_invoicing_group:0
+msgid "One Order - One Invoice"
+msgstr "Un ordine - Una fattura"
 
 #. module: l10n_it_ddt
 #: model:ir.model,name:l10n_it_ddt.model_stock_picking_package_preparation

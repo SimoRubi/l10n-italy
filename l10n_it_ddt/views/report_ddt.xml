@@ -4,8 +4,12 @@
         <template id="delivery_data">
 
             <style type="text/css">
-                table.delivery_data td h6 { margin: 0; }
-                .signature { min-height: 4em; }
+                table.delivery_data td h6 {
+                margin: 0;
+                }
+                 .signature {
+                min-height: 4em;
+                }
             </style>
 
             <table class="table table-condensed table-bordered delivery_data">
@@ -41,8 +45,10 @@
                         <div class="signature" t-field="ddt.carrier_id.name"></div>
                     </td>
                     <td>
-                        <h6>Date</h6>
-                        <div class="signature" t-field="ddt.date"></div>
+                        <h6>Transport Start Date</h6>
+                        <t t-if="ddt.date_transport_start">
+                            <div class="signature" t-field="ddt.date_transport_start"></div>
+                        </t>
                     </td>
                     <td>
                         <h6>Pick up time</h6>
@@ -82,7 +88,7 @@
         </template>
 
         <template id="report_ddt">
-            <t t-call="report.external_layout">
+            <t t-call="web.external_layout">
                 <t t-set="o" t-value="o.with_context({'lang':o.partner_id.lang})" />
                 <div class="page">
                     <div class="row">
@@ -100,8 +106,14 @@
                         </div>
                     </div>
                     <h1>DDT number: <span t-field="o.ddt_number"></span></h1>
+                    <h5><strong>Date:</strong> <span t-esc="o.get_date_for_ddt_report()"></span></h5>
+                    <t t-if="o.client_order_ref">
+                        <h5><strong>Client Ref:</strong> <span t-esc="o.client_order_ref"></span></h5>
+                    </t>
                     <table class="table table-condensed">
-                        <t t-set="has_serial_number" t-value="o.line_ids.filtered('move_id.lot_ids')" groups="stock.group_production_lot"/>
+                        <t t-set="has_serial_number"
+                           t-value="o.line_ids.filtered('move_id.lot_id')"
+                           groups="stock.group_production_lot"/>
                         <thead>
                             <tr>
                                 <th><strong>Description</strong></th>
@@ -117,16 +129,13 @@
                         </thead>
                         <tbody>
                             <tr t-foreach="o.line_ids" t-as="line">
-                                <t t-set="lot_dict" t-value="line.quantity_by_lot()"/>
                                 <td><span t-field="line.name"></span></td>
                                 <td class="text-right"><span t-field="line.product_uom_qty"></span></td>
                                 <t t-if="has_serial_number">
-                                    <td t-if="line.move_id.lot_ids" class="text-right">
-                                        <t t-foreach="lot_dict" t-as="lot">
-                                            <div>· <t t-esc="lot.name"/> <t t-if="lot_dict[lot]">(<t t-esc="lot_dict[lot]"/>)</t></div>
-                                        </t>
-                                </td>
-                                    <td t-if="not line.move_id.lot_ids"/>
+                                    <td t-if="line.move_id.lot_id" class="text-right">
+                                        <span><t t-esc="line.move_id.lot_id.name"/></span>
+                                    </td>
+                                    <td t-if="not line.move_id.lot_id"/>
                                 </t>
                                 <t t-if="o.show_price">
                                     <td class="text-right" id="line_price_unit"><span t-field="line.price_unit"></span></td>
@@ -143,7 +152,7 @@
         </template>
 
         <template id="report_ddt_main">
-            <t t-call="report.html_container">
+            <t t-call="web.html_container">
                 <t t-foreach="docs" t-as="o">
                     <t t-call="l10n_it_ddt.report_ddt" t-lang="o.partner_id.lang"/>
                 </t>

@@ -36,6 +36,10 @@ class AccountInvoice(models.Model):
     volume = fields.Float('Volume')
     ddt_ids = fields.One2many(
         'stock.picking.package.preparation', 'invoice_id', string='DDT')
+    date_transport_start = fields.Datetime(
+        string="Transport Start")
+    ddt_client_order_ref = fields.Text(
+        string="DDT Client Order Ref")
 
     @api.onchange('partner_id', 'company_id')
     def _onchange_partner_id(self):

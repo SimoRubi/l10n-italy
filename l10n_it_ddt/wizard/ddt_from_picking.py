@@ -72,8 +72,8 @@ class DdTFromPickings(models.TransientModel):
         for picking in self.picking_ids:
             if picking.sale_id and picking.sale_id.carriage_condition_id:
                 if carriage_condition_id and (
-                    carriage_condition_id != (
-                        picking.sale_id.carriage_condition_id)):
+                            carriage_condition_id != (
+                                picking.sale_id.carriage_condition_id)):
                     raise UserError(
                         _("Selected Pickings have"
                           " different carriage condition"))
@@ -97,8 +97,8 @@ class DdTFromPickings(models.TransientModel):
         for picking in self.picking_ids:
             if picking.sale_id and picking.sale_id.goods_description_id:
                 if goods_description_id and (
-                    goods_description_id != (
-                        picking.sale_id.goods_description_id)):
+                            goods_description_id != (
+                                picking.sale_id.goods_description_id)):
                     raise UserError(
                         _("Selected Pickings have "
                           "different goods description"))
@@ -122,8 +122,8 @@ class DdTFromPickings(models.TransientModel):
             if picking.sale_id and (
                     picking.sale_id.transportation_reason_id):
                 if transportation_reason_id and (
-                    transportation_reason_id != (
-                        picking.sale_id.transportation_reason_id)):
+                            transportation_reason_id != (
+                                picking.sale_id.transportation_reason_id)):
                     raise UserError(
                         _("Selected Pickings have"
                           " different transportation reason"))
@@ -148,8 +148,8 @@ class DdTFromPickings(models.TransientModel):
             if picking.sale_id and (
                     picking.sale_id.transportation_method_id):
                 if transportation_method_id and (
-                    transportation_method_id != (
-                        picking.sale_id.transportation_method_id)):
+                            transportation_method_id != (
+                                picking.sale_id.transportation_method_id)):
                     raise UserError(
                         _("Selected Pickings have"
                           " different transportation method"))
@@ -177,7 +177,13 @@ class DdTFromPickings(models.TransientModel):
             values['volume'] = self.picking_ids[0].sale_id.volume
 
         picking_ids = [p.id for p in self.picking_ids]
-        values.update({'picking_ids': [(6, 0, picking_ids)]})
+        client_order_ref = ", ".join(
+            [p.sale_id.client_order_ref
+             for p in self.picking_ids
+             if p.sale_id and p.sale_id.client_order_ref]
+        )
+        values.update({'picking_ids': [(6, 0, picking_ids)],
+                       'client_order_ref': client_order_ref})
         ddt = self.env['stock.picking.package.preparation'].create(values)
         # ----- Show new ddt
         ir_model_data = self.env['ir.model.data']
