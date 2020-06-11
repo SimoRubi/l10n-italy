@@ -1,18 +1,18 @@
-# flake8: noqa
+# flake8: noqa`
 # PyXB bindings for NM:32e521a6da5b62d07147ea75b23acb0fb9726893
 # Generated 2020-06-11 15:53:54.097929 by PyXB version 1.2.6 using Python 3.6.9.final.0
 # Namespace http://ivaservizi.agenziaentrate.gov.it/docs/xsd/fatture/v1.2
 
 from __future__ import unicode_literals
-import logging
 import io
-import sys
+
+import logging
 
 _logger = logging.getLogger(__name__)
-
 try:
     import pyxb
     import pyxb.binding
+    import pyxb.binding.datatypes
     import pyxb.binding.saxer
     import pyxb.utils.utility
     import pyxb.utils.domutils
@@ -21,6 +21,7 @@ try:
     import pyxb.binding.datatypes
 except (ImportError) as err:
     _logger.debug(err)
+
 # Unique identifier for bindings created at the same time
 _GenerationUID = pyxb.utils.utility.UniqueIdentifier('urn:uuid:f33a6cc4-abea-11ea-89e6-e09467884037')
 
@@ -34,6 +35,7 @@ if pyxb.__version__ != _PyXBVersion:
 # inside class definitions where property names may conflict.
 _module_typeBindings = pyxb.utils.utility.Object()
 
+# Import bindings for namespaces imported into schema
 from . import _ds as _ImportedBinding__ds
 
 # NOTE: All namespace declarations are reserved within the binding
@@ -107,10 +109,10 @@ class CodiceType (pyxb.binding.datatypes.string):
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'CodiceType')
     _XSDLocation = pyxb.utils.utility.Location('https://www.fatturapa.gov.it/export/fatturazione/sdi/fatturapa/v1.3/Schema_del_file_xml_FatturaPA_versione_1.2.1.xsd', 68, 2)
     _Documentation = None
-CodiceType._CF_minLength = pyxb.binding.facets.CF_minLength(value=pyxb.binding.datatypes.nonNegativeInteger(1))
 CodiceType._CF_maxLength = pyxb.binding.facets.CF_maxLength(value=pyxb.binding.datatypes.nonNegativeInteger(28))
-CodiceType._InitializeFacetMap(CodiceType._CF_minLength,
-   CodiceType._CF_maxLength)
+CodiceType._CF_minLength = pyxb.binding.facets.CF_minLength(value=pyxb.binding.datatypes.nonNegativeInteger(1))
+CodiceType._InitializeFacetMap(CodiceType._CF_maxLength,
+   CodiceType._CF_minLength)
 Namespace.addCategoryObject('typeBinding', 'CodiceType', CodiceType)
 _module_typeBindings.CodiceType = CodiceType
 
@@ -122,12 +124,12 @@ class FormatoTrasmissioneType (pyxb.binding.datatypes.string, pyxb.binding.basis
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'FormatoTrasmissioneType')
     _XSDLocation = pyxb.utils.utility.Location('https://www.fatturapa.gov.it/export/fatturazione/sdi/fatturapa/v1.3/Schema_del_file_xml_FatturaPA_versione_1.2.1.xsd', 74, 2)
     _Documentation = None
-FormatoTrasmissioneType._CF_length = pyxb.binding.facets.CF_length(value=pyxb.binding.datatypes.nonNegativeInteger(5))
-FormatoTrasmissioneType._CF_enumeration = pyxb.binding.facets.CF_enumeration(value_datatype=FormatoTrasmissioneType, enum_prefix=None)
+FormatoTrasmissioneType._CF_enumeration = pyxb.binding.facets.CF_enumeration(enum_prefix=None, value_datatype=FormatoTrasmissioneType)
 FormatoTrasmissioneType.FPA12 = FormatoTrasmissioneType._CF_enumeration.addEnumeration(unicode_value='FPA12', tag='FPA12')
 FormatoTrasmissioneType.FPR12 = FormatoTrasmissioneType._CF_enumeration.addEnumeration(unicode_value='FPR12', tag='FPR12')
-FormatoTrasmissioneType._InitializeFacetMap(FormatoTrasmissioneType._CF_length,
-   FormatoTrasmissioneType._CF_enumeration)
+FormatoTrasmissioneType._CF_length = pyxb.binding.facets.CF_length(value=pyxb.binding.datatypes.nonNegativeInteger(5))
+FormatoTrasmissioneType._InitializeFacetMap(FormatoTrasmissioneType._CF_enumeration,
+   FormatoTrasmissioneType._CF_length)
 Namespace.addCategoryObject('typeBinding', 'FormatoTrasmissioneType', FormatoTrasmissioneType)
 _module_typeBindings.FormatoTrasmissioneType = FormatoTrasmissioneType
 
@@ -139,7 +141,7 @@ class CausalePagamentoType (pyxb.binding.datatypes.string, pyxb.binding.basis.en
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'CausalePagamentoType')
     _XSDLocation = pyxb.utils.utility.Location('https://www.fatturapa.gov.it/export/fatturazione/sdi/fatturapa/v1.3/Schema_del_file_xml_FatturaPA_versione_1.2.1.xsd', 163, 2)
     _Documentation = None
-CausalePagamentoType._CF_enumeration = pyxb.binding.facets.CF_enumeration(value_datatype=CausalePagamentoType, enum_prefix=None)
+CausalePagamentoType._CF_enumeration = pyxb.binding.facets.CF_enumeration(enum_prefix=None, value_datatype=CausalePagamentoType)
 CausalePagamentoType.A = CausalePagamentoType._CF_enumeration.addEnumeration(unicode_value='A', tag='A')
 CausalePagamentoType.B = CausalePagamentoType._CF_enumeration.addEnumeration(unicode_value='B', tag='B')
 CausalePagamentoType.C = CausalePagamentoType._CF_enumeration.addEnumeration(unicode_value='C', tag='C')
@@ -180,12 +182,12 @@ class TipoScontoMaggiorazioneType (pyxb.binding.datatypes.string, pyxb.binding.b
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'TipoScontoMaggiorazioneType')
     _XSDLocation = pyxb.utils.utility.Location('https://www.fatturapa.gov.it/export/fatturazione/sdi/fatturapa/v1.3/Schema_del_file_xml_FatturaPA_versione_1.2.1.xsd', 196, 2)
     _Documentation = None
-TipoScontoMaggiorazioneType._CF_length = pyxb.binding.facets.CF_length(value=pyxb.binding.datatypes.nonNegativeInteger(2))
-TipoScontoMaggiorazioneType._CF_enumeration = pyxb.binding.facets.CF_enumeration(value_datatype=TipoScontoMaggiorazioneType, enum_prefix=None)
+TipoScontoMaggiorazioneType._CF_enumeration = pyxb.binding.facets.CF_enumeration(enum_prefix=None, value_datatype=TipoScontoMaggiorazioneType)
 TipoScontoMaggiorazioneType.SC = TipoScontoMaggiorazioneType._CF_enumeration.addEnumeration(unicode_value='SC', tag='SC')
 TipoScontoMaggiorazioneType.MG = TipoScontoMaggiorazioneType._CF_enumeration.addEnumeration(unicode_value='MG', tag='MG')
-TipoScontoMaggiorazioneType._InitializeFacetMap(TipoScontoMaggiorazioneType._CF_length,
-   TipoScontoMaggiorazioneType._CF_enumeration)
+TipoScontoMaggiorazioneType._CF_length = pyxb.binding.facets.CF_length(value=pyxb.binding.datatypes.nonNegativeInteger(2))
+TipoScontoMaggiorazioneType._InitializeFacetMap(TipoScontoMaggiorazioneType._CF_enumeration,
+   TipoScontoMaggiorazioneType._CF_length)
 Namespace.addCategoryObject('typeBinding', 'TipoScontoMaggiorazioneType', TipoScontoMaggiorazioneType)
 _module_typeBindings.TipoScontoMaggiorazioneType = TipoScontoMaggiorazioneType
 
@@ -197,11 +199,11 @@ class Art73Type (pyxb.binding.datatypes.string, pyxb.binding.basis.enumeration_m
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'Art73Type')
     _XSDLocation = pyxb.utils.utility.Location('https://www.fatturapa.gov.it/export/fatturazione/sdi/fatturapa/v1.3/Schema_del_file_xml_FatturaPA_versione_1.2.1.xsd', 211, 2)
     _Documentation = None
-Art73Type._CF_length = pyxb.binding.facets.CF_length(value=pyxb.binding.datatypes.nonNegativeInteger(2))
-Art73Type._CF_enumeration = pyxb.binding.facets.CF_enumeration(value_datatype=Art73Type, enum_prefix=None)
+Art73Type._CF_enumeration = pyxb.binding.facets.CF_enumeration(enum_prefix=None, value_datatype=Art73Type)
 Art73Type.SI = Art73Type._CF_enumeration.addEnumeration(unicode_value='SI', tag='SI')
-Art73Type._InitializeFacetMap(Art73Type._CF_length,
-   Art73Type._CF_enumeration)
+Art73Type._CF_length = pyxb.binding.facets.CF_length(value=pyxb.binding.datatypes.nonNegativeInteger(2))
+Art73Type._InitializeFacetMap(Art73Type._CF_enumeration,
+   Art73Type._CF_length)
 Namespace.addCategoryObject('typeBinding', 'Art73Type', Art73Type)
 _module_typeBindings.Art73Type = Art73Type
 
@@ -213,8 +215,7 @@ class TipoCassaType (pyxb.binding.datatypes.string, pyxb.binding.basis.enumerati
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'TipoCassaType')
     _XSDLocation = pyxb.utils.utility.Location('https://www.fatturapa.gov.it/export/fatturazione/sdi/fatturapa/v1.3/Schema_del_file_xml_FatturaPA_versione_1.2.1.xsd', 221, 2)
     _Documentation = None
-TipoCassaType._CF_length = pyxb.binding.facets.CF_length(value=pyxb.binding.datatypes.nonNegativeInteger(4))
-TipoCassaType._CF_enumeration = pyxb.binding.facets.CF_enumeration(value_datatype=TipoCassaType, enum_prefix=None)
+TipoCassaType._CF_enumeration = pyxb.binding.facets.CF_enumeration(enum_prefix=None, value_datatype=TipoCassaType)
 TipoCassaType.TC01 = TipoCassaType._CF_enumeration.addEnumeration(unicode_value='TC01', tag='TC01')
 TipoCassaType.TC02 = TipoCassaType._CF_enumeration.addEnumeration(unicode_value='TC02', tag='TC02')
 TipoCassaType.TC03 = TipoCassaType._CF_enumeration.addEnumeration(unicode_value='TC03', tag='TC03')
@@ -237,8 +238,9 @@ TipoCassaType.TC19 = TipoCassaType._CF_enumeration.addEnumeration(unicode_value=
 TipoCassaType.TC20 = TipoCassaType._CF_enumeration.addEnumeration(unicode_value='TC20', tag='TC20')
 TipoCassaType.TC21 = TipoCassaType._CF_enumeration.addEnumeration(unicode_value='TC21', tag='TC21')
 TipoCassaType.TC22 = TipoCassaType._CF_enumeration.addEnumeration(unicode_value='TC22', tag='TC22')
-TipoCassaType._InitializeFacetMap(TipoCassaType._CF_length,
-   TipoCassaType._CF_enumeration)
+TipoCassaType._CF_length = pyxb.binding.facets.CF_length(value=pyxb.binding.datatypes.nonNegativeInteger(4))
+TipoCassaType._InitializeFacetMap(TipoCassaType._CF_enumeration,
+   TipoCassaType._CF_length)
 Namespace.addCategoryObject('typeBinding', 'TipoCassaType', TipoCassaType)
 _module_typeBindings.TipoCassaType = TipoCassaType
 
@@ -250,8 +252,7 @@ class TipoDocumentoType (pyxb.binding.datatypes.string, pyxb.binding.basis.enume
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'TipoDocumentoType')
     _XSDLocation = pyxb.utils.utility.Location('https://www.fatturapa.gov.it/export/fatturazione/sdi/fatturapa/v1.3/Schema_del_file_xml_FatturaPA_versione_1.2.1.xsd', 336, 2)
     _Documentation = None
-TipoDocumentoType._CF_length = pyxb.binding.facets.CF_length(value=pyxb.binding.datatypes.nonNegativeInteger(4))
-TipoDocumentoType._CF_enumeration = pyxb.binding.facets.CF_enumeration(value_datatype=TipoDocumentoType, enum_prefix=None)
+TipoDocumentoType._CF_enumeration = pyxb.binding.facets.CF_enumeration(enum_prefix=None, value_datatype=TipoDocumentoType)
 TipoDocumentoType.TD01 = TipoDocumentoType._CF_enumeration.addEnumeration(unicode_value='TD01', tag='TD01')
 TipoDocumentoType.TD02 = TipoDocumentoType._CF_enumeration.addEnumeration(unicode_value='TD02', tag='TD02')
 TipoDocumentoType.TD03 = TipoDocumentoType._CF_enumeration.addEnumeration(unicode_value='TD03', tag='TD03')
@@ -270,8 +271,14 @@ TipoDocumentoType.TD24 = TipoDocumentoType._CF_enumeration.addEnumeration(unicod
 TipoDocumentoType.TD25 = TipoDocumentoType._CF_enumeration.addEnumeration(unicode_value='TD25', tag='TD25')
 TipoDocumentoType.TD26 = TipoDocumentoType._CF_enumeration.addEnumeration(unicode_value='TD26', tag='TD26')
 TipoDocumentoType.TD27 = TipoDocumentoType._CF_enumeration.addEnumeration(unicode_value='TD27', tag='TD27')
+<<<<<<< HEAD
 TipoDocumentoType._InitializeFacetMap(TipoDocumentoType._CF_length,
    TipoDocumentoType._CF_enumeration)
+=======
+TipoDocumentoType._CF_length = pyxb.binding.facets.CF_length(value=pyxb.binding.datatypes.nonNegativeInteger(4))
+TipoDocumentoType._InitializeFacetMap(TipoDocumentoType._CF_enumeration,
+   TipoDocumentoType._CF_length)
+>>>>>>> 12.0-l10n_it_fatturapa-binding
 Namespace.addCategoryObject('typeBinding', 'TipoDocumentoType', TipoDocumentoType)
 _module_typeBindings.TipoDocumentoType = TipoDocumentoType
 
@@ -283,16 +290,21 @@ class TipoRitenutaType (pyxb.binding.datatypes.string, pyxb.binding.basis.enumer
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'TipoRitenutaType')
     _XSDLocation = pyxb.utils.utility.Location('https://www.fatturapa.gov.it/export/fatturazione/sdi/fatturapa/v1.3/Schema_del_file_xml_FatturaPA_versione_1.2.1.xsd', 431, 2)
     _Documentation = None
-TipoRitenutaType._CF_length = pyxb.binding.facets.CF_length(value=pyxb.binding.datatypes.nonNegativeInteger(4))
-TipoRitenutaType._CF_enumeration = pyxb.binding.facets.CF_enumeration(value_datatype=TipoRitenutaType, enum_prefix=None)
+TipoRitenutaType._CF_enumeration = pyxb.binding.facets.CF_enumeration(enum_prefix=None, value_datatype=TipoRitenutaType)
 TipoRitenutaType.RT01 = TipoRitenutaType._CF_enumeration.addEnumeration(unicode_value='RT01', tag='RT01')
 TipoRitenutaType.RT02 = TipoRitenutaType._CF_enumeration.addEnumeration(unicode_value='RT02', tag='RT02')
 TipoRitenutaType.RT03 = TipoRitenutaType._CF_enumeration.addEnumeration(unicode_value='RT03', tag='RT03')
 TipoRitenutaType.RT04 = TipoRitenutaType._CF_enumeration.addEnumeration(unicode_value='RT04', tag='RT04')
 TipoRitenutaType.RT05 = TipoRitenutaType._CF_enumeration.addEnumeration(unicode_value='RT05', tag='RT05')
 TipoRitenutaType.RT06 = TipoRitenutaType._CF_enumeration.addEnumeration(unicode_value='RT06', tag='RT06')
+<<<<<<< HEAD
 TipoRitenutaType._InitializeFacetMap(TipoRitenutaType._CF_length,
    TipoRitenutaType._CF_enumeration)
+=======
+TipoRitenutaType._CF_length = pyxb.binding.facets.CF_length(value=pyxb.binding.datatypes.nonNegativeInteger(4))
+TipoRitenutaType._InitializeFacetMap(TipoRitenutaType._CF_enumeration,
+   TipoRitenutaType._CF_length)
+>>>>>>> 12.0-l10n_it_fatturapa-binding
 Namespace.addCategoryObject('typeBinding', 'TipoRitenutaType', TipoRitenutaType)
 _module_typeBindings.TipoRitenutaType = TipoRitenutaType
 
@@ -304,10 +316,10 @@ class RiferimentoNumeroLineaType (pyxb.binding.datatypes.integer):
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'RiferimentoNumeroLineaType')
     _XSDLocation = pyxb.utils.utility.Location('https://www.fatturapa.gov.it/export/fatturazione/sdi/fatturapa/v1.3/Schema_del_file_xml_FatturaPA_versione_1.2.1.xsd', 482, 2)
     _Documentation = None
-RiferimentoNumeroLineaType._CF_minInclusive = pyxb.binding.facets.CF_minInclusive(value_datatype=RiferimentoNumeroLineaType, value=pyxb.binding.datatypes.integer(1))
-RiferimentoNumeroLineaType._CF_maxInclusive = pyxb.binding.facets.CF_maxInclusive(value_datatype=RiferimentoNumeroLineaType, value=pyxb.binding.datatypes.integer(9999))
-RiferimentoNumeroLineaType._InitializeFacetMap(RiferimentoNumeroLineaType._CF_minInclusive,
-   RiferimentoNumeroLineaType._CF_maxInclusive)
+RiferimentoNumeroLineaType._CF_maxInclusive = pyxb.binding.facets.CF_maxInclusive(value=pyxb.binding.datatypes.integer(9999), value_datatype=RiferimentoNumeroLineaType)
+RiferimentoNumeroLineaType._CF_minInclusive = pyxb.binding.facets.CF_minInclusive(value=pyxb.binding.datatypes.integer(1), value_datatype=RiferimentoNumeroLineaType)
+RiferimentoNumeroLineaType._InitializeFacetMap(RiferimentoNumeroLineaType._CF_maxInclusive,
+   RiferimentoNumeroLineaType._CF_minInclusive)
 Namespace.addCategoryObject('typeBinding', 'RiferimentoNumeroLineaType', RiferimentoNumeroLineaType)
 _module_typeBindings.RiferimentoNumeroLineaType = RiferimentoNumeroLineaType
 
@@ -319,12 +331,12 @@ class SoggettoEmittenteType (pyxb.binding.datatypes.string, pyxb.binding.basis.e
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'SoggettoEmittenteType')
     _XSDLocation = pyxb.utils.utility.Location('https://www.fatturapa.gov.it/export/fatturazione/sdi/fatturapa/v1.3/Schema_del_file_xml_FatturaPA_versione_1.2.1.xsd', 528, 2)
     _Documentation = None
-SoggettoEmittenteType._CF_length = pyxb.binding.facets.CF_length(value=pyxb.binding.datatypes.nonNegativeInteger(2))
-SoggettoEmittenteType._CF_enumeration = pyxb.binding.facets.CF_enumeration(value_datatype=SoggettoEmittenteType, enum_prefix=None)
+SoggettoEmittenteType._CF_enumeration = pyxb.binding.facets.CF_enumeration(enum_prefix=None, value_datatype=SoggettoEmittenteType)
 SoggettoEmittenteType.CC = SoggettoEmittenteType._CF_enumeration.addEnumeration(unicode_value='CC', tag='CC')
 SoggettoEmittenteType.TZ = SoggettoEmittenteType._CF_enumeration.addEnumeration(unicode_value='TZ', tag='TZ')
-SoggettoEmittenteType._InitializeFacetMap(SoggettoEmittenteType._CF_length,
-   SoggettoEmittenteType._CF_enumeration)
+SoggettoEmittenteType._CF_length = pyxb.binding.facets.CF_length(value=pyxb.binding.datatypes.nonNegativeInteger(2))
+SoggettoEmittenteType._InitializeFacetMap(SoggettoEmittenteType._CF_enumeration,
+   SoggettoEmittenteType._CF_length)
 Namespace.addCategoryObject('typeBinding', 'SoggettoEmittenteType', SoggettoEmittenteType)
 _module_typeBindings.SoggettoEmittenteType = SoggettoEmittenteType
 
@@ -336,8 +348,7 @@ class RegimeFiscaleType (pyxb.binding.datatypes.string, pyxb.binding.basis.enume
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'RegimeFiscaleType')
     _XSDLocation = pyxb.utils.utility.Location('https://www.fatturapa.gov.it/export/fatturazione/sdi/fatturapa/v1.3/Schema_del_file_xml_FatturaPA_versione_1.2.1.xsd', 568, 2)
     _Documentation = None
-RegimeFiscaleType._CF_length = pyxb.binding.facets.CF_length(value=pyxb.binding.datatypes.nonNegativeInteger(4))
-RegimeFiscaleType._CF_enumeration = pyxb.binding.facets.CF_enumeration(value_datatype=RegimeFiscaleType, enum_prefix=None)
+RegimeFiscaleType._CF_enumeration = pyxb.binding.facets.CF_enumeration(enum_prefix=None, value_datatype=RegimeFiscaleType)
 RegimeFiscaleType.RF01 = RegimeFiscaleType._CF_enumeration.addEnumeration(unicode_value='RF01', tag='RF01')
 RegimeFiscaleType.RF02 = RegimeFiscaleType._CF_enumeration.addEnumeration(unicode_value='RF02', tag='RF02')
 RegimeFiscaleType.RF04 = RegimeFiscaleType._CF_enumeration.addEnumeration(unicode_value='RF04', tag='RF04')
@@ -356,8 +367,9 @@ RegimeFiscaleType.RF16 = RegimeFiscaleType._CF_enumeration.addEnumeration(unicod
 RegimeFiscaleType.RF17 = RegimeFiscaleType._CF_enumeration.addEnumeration(unicode_value='RF17', tag='RF17')
 RegimeFiscaleType.RF19 = RegimeFiscaleType._CF_enumeration.addEnumeration(unicode_value='RF19', tag='RF19')
 RegimeFiscaleType.RF18 = RegimeFiscaleType._CF_enumeration.addEnumeration(unicode_value='RF18', tag='RF18')
-RegimeFiscaleType._InitializeFacetMap(RegimeFiscaleType._CF_length,
-   RegimeFiscaleType._CF_enumeration)
+RegimeFiscaleType._CF_length = pyxb.binding.facets.CF_length(value=pyxb.binding.datatypes.nonNegativeInteger(4))
+RegimeFiscaleType._InitializeFacetMap(RegimeFiscaleType._CF_enumeration,
+   RegimeFiscaleType._CF_length)
 Namespace.addCategoryObject('typeBinding', 'RegimeFiscaleType', RegimeFiscaleType)
 _module_typeBindings.RegimeFiscaleType = RegimeFiscaleType
 
@@ -369,15 +381,15 @@ class CondizioniPagamentoType (pyxb.binding.datatypes.string, pyxb.binding.basis
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'CondizioniPagamentoType')
     _XSDLocation = pyxb.utils.utility.Location('https://www.fatturapa.gov.it/export/fatturazione/sdi/fatturapa/v1.3/Schema_del_file_xml_FatturaPA_versione_1.2.1.xsd', 780, 2)
     _Documentation = None
-CondizioniPagamentoType._CF_minLength = pyxb.binding.facets.CF_minLength(value=pyxb.binding.datatypes.nonNegativeInteger(4))
-CondizioniPagamentoType._CF_maxLength = pyxb.binding.facets.CF_maxLength(value=pyxb.binding.datatypes.nonNegativeInteger(4))
-CondizioniPagamentoType._CF_enumeration = pyxb.binding.facets.CF_enumeration(value_datatype=CondizioniPagamentoType, enum_prefix=None)
+CondizioniPagamentoType._CF_enumeration = pyxb.binding.facets.CF_enumeration(enum_prefix=None, value_datatype=CondizioniPagamentoType)
 CondizioniPagamentoType.TP01 = CondizioniPagamentoType._CF_enumeration.addEnumeration(unicode_value='TP01', tag='TP01')
 CondizioniPagamentoType.TP02 = CondizioniPagamentoType._CF_enumeration.addEnumeration(unicode_value='TP02', tag='TP02')
 CondizioniPagamentoType.TP03 = CondizioniPagamentoType._CF_enumeration.addEnumeration(unicode_value='TP03', tag='TP03')
-CondizioniPagamentoType._InitializeFacetMap(CondizioniPagamentoType._CF_minLength,
+CondizioniPagamentoType._CF_maxLength = pyxb.binding.facets.CF_maxLength(value=pyxb.binding.datatypes.nonNegativeInteger(4))
+CondizioniPagamentoType._CF_minLength = pyxb.binding.facets.CF_minLength(value=pyxb.binding.datatypes.nonNegativeInteger(4))
+CondizioniPagamentoType._InitializeFacetMap(CondizioniPagamentoType._CF_enumeration,
    CondizioniPagamentoType._CF_maxLength,
-   CondizioniPagamentoType._CF_enumeration)
+   CondizioniPagamentoType._CF_minLength)
 Namespace.addCategoryObject('typeBinding', 'CondizioniPagamentoType', CondizioniPagamentoType)
 _module_typeBindings.CondizioniPagamentoType = CondizioniPagamentoType
 
@@ -389,8 +401,7 @@ class ModalitaPagamentoType (pyxb.binding.datatypes.string, pyxb.binding.basis.e
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'ModalitaPagamentoType')
     _XSDLocation = pyxb.utils.utility.Location('https://www.fatturapa.gov.it/export/fatturazione/sdi/fatturapa/v1.3/Schema_del_file_xml_FatturaPA_versione_1.2.1.xsd', 826, 2)
     _Documentation = None
-ModalitaPagamentoType._CF_length = pyxb.binding.facets.CF_length(value=pyxb.binding.datatypes.nonNegativeInteger(4))
-ModalitaPagamentoType._CF_enumeration = pyxb.binding.facets.CF_enumeration(value_datatype=ModalitaPagamentoType, enum_prefix=None)
+ModalitaPagamentoType._CF_enumeration = pyxb.binding.facets.CF_enumeration(enum_prefix=None, value_datatype=ModalitaPagamentoType)
 ModalitaPagamentoType.MP01 = ModalitaPagamentoType._CF_enumeration.addEnumeration(unicode_value='MP01', tag='MP01')
 ModalitaPagamentoType.MP02 = ModalitaPagamentoType._CF_enumeration.addEnumeration(unicode_value='MP02', tag='MP02')
 ModalitaPagamentoType.MP03 = ModalitaPagamentoType._CF_enumeration.addEnumeration(unicode_value='MP03', tag='MP03')
@@ -414,8 +425,14 @@ ModalitaPagamentoType.MP20 = ModalitaPagamentoType._CF_enumeration.addEnumeratio
 ModalitaPagamentoType.MP21 = ModalitaPagamentoType._CF_enumeration.addEnumeration(unicode_value='MP21', tag='MP21')
 ModalitaPagamentoType.MP22 = ModalitaPagamentoType._CF_enumeration.addEnumeration(unicode_value='MP22', tag='MP22')
 ModalitaPagamentoType.MP23 = ModalitaPagamentoType._CF_enumeration.addEnumeration(unicode_value='MP23', tag='MP23')
+<<<<<<< HEAD
 ModalitaPagamentoType._InitializeFacetMap(ModalitaPagamentoType._CF_length,
    ModalitaPagamentoType._CF_enumeration)
+=======
+ModalitaPagamentoType._CF_length = pyxb.binding.facets.CF_length(value=pyxb.binding.datatypes.nonNegativeInteger(4))
+ModalitaPagamentoType._InitializeFacetMap(ModalitaPagamentoType._CF_enumeration,
+   ModalitaPagamentoType._CF_length)
+>>>>>>> 12.0-l10n_it_fatturapa-binding
 Namespace.addCategoryObject('typeBinding', 'ModalitaPagamentoType', ModalitaPagamentoType)
 _module_typeBindings.ModalitaPagamentoType = ModalitaPagamentoType
 
@@ -455,11 +472,11 @@ class RitenutaType (pyxb.binding.datatypes.string, pyxb.binding.basis.enumeratio
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'RitenutaType')
     _XSDLocation = pyxb.utils.utility.Location('https://www.fatturapa.gov.it/export/fatturazione/sdi/fatturapa/v1.3/Schema_del_file_xml_FatturaPA_versione_1.2.1.xsd', 1017, 2)
     _Documentation = None
-RitenutaType._CF_length = pyxb.binding.facets.CF_length(value=pyxb.binding.datatypes.nonNegativeInteger(2))
-RitenutaType._CF_enumeration = pyxb.binding.facets.CF_enumeration(value_datatype=RitenutaType, enum_prefix=None)
+RitenutaType._CF_enumeration = pyxb.binding.facets.CF_enumeration(enum_prefix=None, value_datatype=RitenutaType)
 RitenutaType.SI = RitenutaType._CF_enumeration.addEnumeration(unicode_value='SI', tag='SI')
-RitenutaType._InitializeFacetMap(RitenutaType._CF_length,
-   RitenutaType._CF_enumeration)
+RitenutaType._CF_length = pyxb.binding.facets.CF_length(value=pyxb.binding.datatypes.nonNegativeInteger(2))
+RitenutaType._InitializeFacetMap(RitenutaType._CF_enumeration,
+   RitenutaType._CF_length)
 Namespace.addCategoryObject('typeBinding', 'RitenutaType', RitenutaType)
 _module_typeBindings.RitenutaType = RitenutaType
 
@@ -471,15 +488,15 @@ class EsigibilitaIVAType (pyxb.binding.datatypes.string, pyxb.binding.basis.enum
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'EsigibilitaIVAType')
     _XSDLocation = pyxb.utils.utility.Location('https://www.fatturapa.gov.it/export/fatturazione/sdi/fatturapa/v1.3/Schema_del_file_xml_FatturaPA_versione_1.2.1.xsd', 1039, 2)
     _Documentation = None
-EsigibilitaIVAType._CF_minLength = pyxb.binding.facets.CF_minLength(value=pyxb.binding.datatypes.nonNegativeInteger(1))
-EsigibilitaIVAType._CF_maxLength = pyxb.binding.facets.CF_maxLength(value=pyxb.binding.datatypes.nonNegativeInteger(1))
-EsigibilitaIVAType._CF_enumeration = pyxb.binding.facets.CF_enumeration(value_datatype=EsigibilitaIVAType, enum_prefix=None)
+EsigibilitaIVAType._CF_enumeration = pyxb.binding.facets.CF_enumeration(enum_prefix=None, value_datatype=EsigibilitaIVAType)
 EsigibilitaIVAType.D = EsigibilitaIVAType._CF_enumeration.addEnumeration(unicode_value='D', tag='D')
 EsigibilitaIVAType.I = EsigibilitaIVAType._CF_enumeration.addEnumeration(unicode_value='I', tag='I')
 EsigibilitaIVAType.S = EsigibilitaIVAType._CF_enumeration.addEnumeration(unicode_value='S', tag='S')
-EsigibilitaIVAType._InitializeFacetMap(EsigibilitaIVAType._CF_minLength,
+EsigibilitaIVAType._CF_maxLength = pyxb.binding.facets.CF_maxLength(value=pyxb.binding.datatypes.nonNegativeInteger(1))
+EsigibilitaIVAType._CF_minLength = pyxb.binding.facets.CF_minLength(value=pyxb.binding.datatypes.nonNegativeInteger(1))
+EsigibilitaIVAType._InitializeFacetMap(EsigibilitaIVAType._CF_enumeration,
    EsigibilitaIVAType._CF_maxLength,
-   EsigibilitaIVAType._CF_enumeration)
+   EsigibilitaIVAType._CF_minLength)
 Namespace.addCategoryObject('typeBinding', 'EsigibilitaIVAType', EsigibilitaIVAType)
 _module_typeBindings.EsigibilitaIVAType = EsigibilitaIVAType
 
@@ -491,7 +508,7 @@ class NaturaType (pyxb.binding.datatypes.string, pyxb.binding.basis.enumeration_
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'NaturaType')
     _XSDLocation = pyxb.utils.utility.Location('https://www.fatturapa.gov.it/export/fatturazione/sdi/fatturapa/v1.3/Schema_del_file_xml_FatturaPA_versione_1.2.1.xsd', 1060, 2)
     _Documentation = None
-NaturaType._CF_enumeration = pyxb.binding.facets.CF_enumeration(value_datatype=NaturaType, enum_prefix=None)
+NaturaType._CF_enumeration = pyxb.binding.facets.CF_enumeration(enum_prefix=None, value_datatype=NaturaType)
 NaturaType.N1 = NaturaType._CF_enumeration.addEnumeration(unicode_value='N1', tag='N1')
 NaturaType.N2 = NaturaType._CF_enumeration.addEnumeration(unicode_value='N2', tag='N2')
 NaturaType.N2_1 = NaturaType._CF_enumeration.addEnumeration(unicode_value='N2.1', tag='N2_1')
@@ -556,10 +573,10 @@ class CodEORIType (pyxb.binding.datatypes.string):
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'CodEORIType')
     _XSDLocation = pyxb.utils.utility.Location('https://www.fatturapa.gov.it/export/fatturazione/sdi/fatturapa/v1.3/Schema_del_file_xml_FatturaPA_versione_1.2.1.xsd', 1197, 2)
     _Documentation = None
-CodEORIType._CF_minLength = pyxb.binding.facets.CF_minLength(value=pyxb.binding.datatypes.nonNegativeInteger(13))
 CodEORIType._CF_maxLength = pyxb.binding.facets.CF_maxLength(value=pyxb.binding.datatypes.nonNegativeInteger(17))
-CodEORIType._InitializeFacetMap(CodEORIType._CF_minLength,
-   CodEORIType._CF_maxLength)
+CodEORIType._CF_minLength = pyxb.binding.facets.CF_minLength(value=pyxb.binding.datatypes.nonNegativeInteger(13))
+CodEORIType._InitializeFacetMap(CodEORIType._CF_maxLength,
+   CodEORIType._CF_minLength)
 Namespace.addCategoryObject('typeBinding', 'CodEORIType', CodEORIType)
 _module_typeBindings.CodEORIType = CodEORIType
 
@@ -571,7 +588,7 @@ class SocioUnicoType (pyxb.binding.datatypes.string, pyxb.binding.basis.enumerat
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'SocioUnicoType')
     _XSDLocation = pyxb.utils.utility.Location('https://www.fatturapa.gov.it/export/fatturazione/sdi/fatturapa/v1.3/Schema_del_file_xml_FatturaPA_versione_1.2.1.xsd', 1203, 2)
     _Documentation = None
-SocioUnicoType._CF_enumeration = pyxb.binding.facets.CF_enumeration(value_datatype=SocioUnicoType, enum_prefix=None)
+SocioUnicoType._CF_enumeration = pyxb.binding.facets.CF_enumeration(enum_prefix=None, value_datatype=SocioUnicoType)
 SocioUnicoType.SU = SocioUnicoType._CF_enumeration.addEnumeration(unicode_value='SU', tag='SU')
 SocioUnicoType.SM = SocioUnicoType._CF_enumeration.addEnumeration(unicode_value='SM', tag='SM')
 SocioUnicoType._InitializeFacetMap(SocioUnicoType._CF_enumeration)
@@ -586,7 +603,7 @@ class StatoLiquidazioneType (pyxb.binding.datatypes.string, pyxb.binding.basis.e
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'StatoLiquidazioneType')
     _XSDLocation = pyxb.utils.utility.Location('https://www.fatturapa.gov.it/export/fatturazione/sdi/fatturapa/v1.3/Schema_del_file_xml_FatturaPA_versione_1.2.1.xsd', 1217, 2)
     _Documentation = None
-StatoLiquidazioneType._CF_enumeration = pyxb.binding.facets.CF_enumeration(value_datatype=StatoLiquidazioneType, enum_prefix=None)
+StatoLiquidazioneType._CF_enumeration = pyxb.binding.facets.CF_enumeration(enum_prefix=None, value_datatype=StatoLiquidazioneType)
 StatoLiquidazioneType.LS = StatoLiquidazioneType._CF_enumeration.addEnumeration(unicode_value='LS', tag='LS')
 StatoLiquidazioneType.LN = StatoLiquidazioneType._CF_enumeration.addEnumeration(unicode_value='LN', tag='LN')
 StatoLiquidazioneType._InitializeFacetMap(StatoLiquidazioneType._CF_enumeration)
@@ -601,14 +618,14 @@ class TipoCessionePrestazioneType (pyxb.binding.datatypes.string, pyxb.binding.b
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'TipoCessionePrestazioneType')
     _XSDLocation = pyxb.utils.utility.Location('https://www.fatturapa.gov.it/export/fatturazione/sdi/fatturapa/v1.3/Schema_del_file_xml_FatturaPA_versione_1.2.1.xsd', 1231, 2)
     _Documentation = None
-TipoCessionePrestazioneType._CF_length = pyxb.binding.facets.CF_length(value=pyxb.binding.datatypes.nonNegativeInteger(2))
-TipoCessionePrestazioneType._CF_enumeration = pyxb.binding.facets.CF_enumeration(value_datatype=TipoCessionePrestazioneType, enum_prefix=None)
+TipoCessionePrestazioneType._CF_enumeration = pyxb.binding.facets.CF_enumeration(enum_prefix=None, value_datatype=TipoCessionePrestazioneType)
 TipoCessionePrestazioneType.SC = TipoCessionePrestazioneType._CF_enumeration.addEnumeration(unicode_value='SC', tag='SC')
 TipoCessionePrestazioneType.PR = TipoCessionePrestazioneType._CF_enumeration.addEnumeration(unicode_value='PR', tag='PR')
 TipoCessionePrestazioneType.AB = TipoCessionePrestazioneType._CF_enumeration.addEnumeration(unicode_value='AB', tag='AB')
 TipoCessionePrestazioneType.AC = TipoCessionePrestazioneType._CF_enumeration.addEnumeration(unicode_value='AC', tag='AC')
-TipoCessionePrestazioneType._InitializeFacetMap(TipoCessionePrestazioneType._CF_length,
-   TipoCessionePrestazioneType._CF_enumeration)
+TipoCessionePrestazioneType._CF_length = pyxb.binding.facets.CF_length(value=pyxb.binding.datatypes.nonNegativeInteger(2))
+TipoCessionePrestazioneType._InitializeFacetMap(TipoCessionePrestazioneType._CF_enumeration,
+   TipoCessionePrestazioneType._CF_length)
 Namespace.addCategoryObject('typeBinding', 'TipoCessionePrestazioneType', TipoCessionePrestazioneType)
 _module_typeBindings.TipoCessionePrestazioneType = TipoCessionePrestazioneType
 
@@ -620,11 +637,11 @@ class TitoloType (pyxb.binding.datatypes.normalizedString):
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'TitoloType')
     _XSDLocation = pyxb.utils.utility.Location('https://www.fatturapa.gov.it/export/fatturazione/sdi/fatturapa/v1.3/Schema_del_file_xml_FatturaPA_versione_1.2.1.xsd', 1256, 2)
     _Documentation = None
+TitoloType._CF_whiteSpace = pyxb.binding.facets.CF_whiteSpace(value=pyxb.binding.facets._WhiteSpace_enum.collapse)
 TitoloType._CF_pattern = pyxb.binding.facets.CF_pattern()
 TitoloType._CF_pattern.addPattern(pattern='(\\p{IsBasicLatin}{2,10})')
-TitoloType._CF_whiteSpace = pyxb.binding.facets.CF_whiteSpace(value=pyxb.binding.facets._WhiteSpace_enum.collapse)
-TitoloType._InitializeFacetMap(TitoloType._CF_pattern,
-   TitoloType._CF_whiteSpace)
+TitoloType._InitializeFacetMap(TitoloType._CF_whiteSpace,
+   TitoloType._CF_pattern)
 Namespace.addCategoryObject('typeBinding', 'TitoloType', TitoloType)
 _module_typeBindings.TitoloType = TitoloType
 
@@ -692,10 +709,17 @@ class String35LatinExtType (pyxb.binding.datatypes.normalizedString):
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'String35LatinExtType')
     _XSDLocation = pyxb.utils.utility.Location('https://www.fatturapa.gov.it/export/fatturazione/sdi/fatturapa/v1.3/Schema_del_file_xml_FatturaPA_versione_1.2.1.xsd', 1282, 2)
     _Documentation = None
+<<<<<<< HEAD
 String35LatinExtType._CF_minLength = pyxb.binding.facets.CF_minLength(value=pyxb.binding.datatypes.nonNegativeInteger(1))
 String35LatinExtType._CF_maxLength = pyxb.binding.facets.CF_maxLength(value=pyxb.binding.datatypes.nonNegativeInteger(35))
 String35LatinExtType._InitializeFacetMap(String35LatinExtType._CF_minLength,
    String35LatinExtType._CF_maxLength)
+=======
+String35LatinExtType._CF_maxLength = pyxb.binding.facets.CF_maxLength(value=pyxb.binding.datatypes.nonNegativeInteger(35))
+String35LatinExtType._CF_minLength = pyxb.binding.facets.CF_minLength(value=pyxb.binding.datatypes.nonNegativeInteger(1))
+String35LatinExtType._InitializeFacetMap(String35LatinExtType._CF_maxLength,
+   String35LatinExtType._CF_minLength)
+>>>>>>> 12.0-l10n_it_fatturapa-binding
 Namespace.addCategoryObject('typeBinding', 'String35LatinExtType', String35LatinExtType)
 _module_typeBindings.String35LatinExtType = String35LatinExtType
 
@@ -889,7 +913,7 @@ class BolloVirtualeType (pyxb.binding.datatypes.string, pyxb.binding.basis.enume
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'BolloVirtualeType')
     _XSDLocation = pyxb.utils.utility.Location('https://www.fatturapa.gov.it/export/fatturazione/sdi/fatturapa/v1.3/Schema_del_file_xml_FatturaPA_versione_1.2.1.xsd', 1353, 2)
     _Documentation = None
-BolloVirtualeType._CF_enumeration = pyxb.binding.facets.CF_enumeration(value_datatype=BolloVirtualeType, enum_prefix=None)
+BolloVirtualeType._CF_enumeration = pyxb.binding.facets.CF_enumeration(enum_prefix=None, value_datatype=BolloVirtualeType)
 BolloVirtualeType.SI = BolloVirtualeType._CF_enumeration.addEnumeration(unicode_value='SI', tag='SI')
 BolloVirtualeType._InitializeFacetMap(BolloVirtualeType._CF_enumeration)
 Namespace.addCategoryObject('typeBinding', 'BolloVirtualeType', BolloVirtualeType)
@@ -975,11 +999,11 @@ class RateType (pyxb.binding.datatypes.decimal):
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'RateType')
     _XSDLocation = pyxb.utils.utility.Location('https://www.fatturapa.gov.it/export/fatturazione/sdi/fatturapa/v1.3/Schema_del_file_xml_FatturaPA_versione_1.2.1.xsd', 1385, 2)
     _Documentation = None
+RateType._CF_maxInclusive = pyxb.binding.facets.CF_maxInclusive(value=pyxb.binding.datatypes.decimal('100.0'), value_datatype=RateType)
 RateType._CF_pattern = pyxb.binding.facets.CF_pattern()
 RateType._CF_pattern.addPattern(pattern='[0-9]{1,3}\\.[0-9]{2}')
-RateType._CF_maxInclusive = pyxb.binding.facets.CF_maxInclusive(value_datatype=RateType, value=pyxb.binding.datatypes.decimal('100.0'))
-RateType._InitializeFacetMap(RateType._CF_pattern,
-   RateType._CF_maxInclusive)
+RateType._InitializeFacetMap(RateType._CF_maxInclusive,
+   RateType._CF_pattern)
 Namespace.addCategoryObject('typeBinding', 'RateType', RateType)
 _module_typeBindings.RateType = RateType
 
@@ -991,10 +1015,10 @@ class RiferimentoFaseType (pyxb.binding.datatypes.integer):
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'RiferimentoFaseType')
     _XSDLocation = pyxb.utils.utility.Location('https://www.fatturapa.gov.it/export/fatturazione/sdi/fatturapa/v1.3/Schema_del_file_xml_FatturaPA_versione_1.2.1.xsd', 1391, 2)
     _Documentation = None
-RiferimentoFaseType._CF_minInclusive = pyxb.binding.facets.CF_minInclusive(value_datatype=RiferimentoFaseType, value=pyxb.binding.datatypes.integer(1))
-RiferimentoFaseType._CF_maxInclusive = pyxb.binding.facets.CF_maxInclusive(value_datatype=RiferimentoFaseType, value=pyxb.binding.datatypes.integer(999))
-RiferimentoFaseType._InitializeFacetMap(RiferimentoFaseType._CF_minInclusive,
-   RiferimentoFaseType._CF_maxInclusive)
+RiferimentoFaseType._CF_maxInclusive = pyxb.binding.facets.CF_maxInclusive(value=pyxb.binding.datatypes.integer(999), value_datatype=RiferimentoFaseType)
+RiferimentoFaseType._CF_minInclusive = pyxb.binding.facets.CF_minInclusive(value=pyxb.binding.datatypes.integer(1), value_datatype=RiferimentoFaseType)
+RiferimentoFaseType._InitializeFacetMap(RiferimentoFaseType._CF_maxInclusive,
+   RiferimentoFaseType._CF_minInclusive)
 Namespace.addCategoryObject('typeBinding', 'RiferimentoFaseType', RiferimentoFaseType)
 _module_typeBindings.RiferimentoFaseType = RiferimentoFaseType
 
@@ -1006,10 +1030,10 @@ class NumeroColliType (pyxb.binding.datatypes.integer):
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'NumeroColliType')
     _XSDLocation = pyxb.utils.utility.Location('https://www.fatturapa.gov.it/export/fatturazione/sdi/fatturapa/v1.3/Schema_del_file_xml_FatturaPA_versione_1.2.1.xsd', 1397, 2)
     _Documentation = None
-NumeroColliType._CF_minInclusive = pyxb.binding.facets.CF_minInclusive(value_datatype=NumeroColliType, value=pyxb.binding.datatypes.integer(1))
-NumeroColliType._CF_maxInclusive = pyxb.binding.facets.CF_maxInclusive(value_datatype=NumeroColliType, value=pyxb.binding.datatypes.integer(9999))
-NumeroColliType._InitializeFacetMap(NumeroColliType._CF_minInclusive,
-   NumeroColliType._CF_maxInclusive)
+NumeroColliType._CF_maxInclusive = pyxb.binding.facets.CF_maxInclusive(value=pyxb.binding.datatypes.integer(9999), value_datatype=NumeroColliType)
+NumeroColliType._CF_minInclusive = pyxb.binding.facets.CF_minInclusive(value=pyxb.binding.datatypes.integer(1), value_datatype=NumeroColliType)
+NumeroColliType._InitializeFacetMap(NumeroColliType._CF_maxInclusive,
+   NumeroColliType._CF_minInclusive)
 Namespace.addCategoryObject('typeBinding', 'NumeroColliType', NumeroColliType)
 _module_typeBindings.NumeroColliType = NumeroColliType
 
@@ -1021,10 +1045,10 @@ class NumeroLineaType (pyxb.binding.datatypes.integer):
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'NumeroLineaType')
     _XSDLocation = pyxb.utils.utility.Location('https://www.fatturapa.gov.it/export/fatturazione/sdi/fatturapa/v1.3/Schema_del_file_xml_FatturaPA_versione_1.2.1.xsd', 1403, 2)
     _Documentation = None
-NumeroLineaType._CF_minInclusive = pyxb.binding.facets.CF_minInclusive(value_datatype=NumeroLineaType, value=pyxb.binding.datatypes.integer(1))
-NumeroLineaType._CF_maxInclusive = pyxb.binding.facets.CF_maxInclusive(value_datatype=NumeroLineaType, value=pyxb.binding.datatypes.integer(9999))
-NumeroLineaType._InitializeFacetMap(NumeroLineaType._CF_minInclusive,
-   NumeroLineaType._CF_maxInclusive)
+NumeroLineaType._CF_maxInclusive = pyxb.binding.facets.CF_maxInclusive(value=pyxb.binding.datatypes.integer(9999), value_datatype=NumeroLineaType)
+NumeroLineaType._CF_minInclusive = pyxb.binding.facets.CF_minInclusive(value=pyxb.binding.datatypes.integer(1), value_datatype=NumeroLineaType)
+NumeroLineaType._InitializeFacetMap(NumeroLineaType._CF_maxInclusive,
+   NumeroLineaType._CF_minInclusive)
 Namespace.addCategoryObject('typeBinding', 'NumeroLineaType', NumeroLineaType)
 _module_typeBindings.NumeroLineaType = NumeroLineaType
 
@@ -1078,10 +1102,10 @@ class GiorniTerminePagamentoType (pyxb.binding.datatypes.integer):
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'GiorniTerminePagamentoType')
     _XSDLocation = pyxb.utils.utility.Location('https://www.fatturapa.gov.it/export/fatturazione/sdi/fatturapa/v1.3/Schema_del_file_xml_FatturaPA_versione_1.2.1.xsd', 1424, 2)
     _Documentation = None
-GiorniTerminePagamentoType._CF_minInclusive = pyxb.binding.facets.CF_minInclusive(value_datatype=GiorniTerminePagamentoType, value=pyxb.binding.datatypes.integer(0))
-GiorniTerminePagamentoType._CF_maxInclusive = pyxb.binding.facets.CF_maxInclusive(value_datatype=GiorniTerminePagamentoType, value=pyxb.binding.datatypes.integer(999))
-GiorniTerminePagamentoType._InitializeFacetMap(GiorniTerminePagamentoType._CF_minInclusive,
-   GiorniTerminePagamentoType._CF_maxInclusive)
+GiorniTerminePagamentoType._CF_maxInclusive = pyxb.binding.facets.CF_maxInclusive(value=pyxb.binding.datatypes.integer(999), value_datatype=GiorniTerminePagamentoType)
+GiorniTerminePagamentoType._CF_minInclusive = pyxb.binding.facets.CF_minInclusive(value=pyxb.binding.datatypes.integer(0), value_datatype=GiorniTerminePagamentoType)
+GiorniTerminePagamentoType._InitializeFacetMap(GiorniTerminePagamentoType._CF_maxInclusive,
+   GiorniTerminePagamentoType._CF_minInclusive)
 Namespace.addCategoryObject('typeBinding', 'GiorniTerminePagamentoType', GiorniTerminePagamentoType)
 _module_typeBindings.GiorniTerminePagamentoType = GiorniTerminePagamentoType
 
@@ -1107,7 +1131,7 @@ class DataFatturaType (pyxb.binding.datatypes.date):
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'DataFatturaType')
     _XSDLocation = pyxb.utils.utility.Location('https://www.fatturapa.gov.it/export/fatturazione/sdi/fatturapa/v1.3/Schema_del_file_xml_FatturaPA_versione_1.2.1.xsd', 1435, 2)
     _Documentation = None
-DataFatturaType._CF_minInclusive = pyxb.binding.facets.CF_minInclusive(value_datatype=DataFatturaType, value=pyxb.binding.datatypes.date('1970-01-01'))
+DataFatturaType._CF_minInclusive = pyxb.binding.facets.CF_minInclusive(value=pyxb.binding.datatypes.date('1970-01-01'), value_datatype=DataFatturaType)
 DataFatturaType._InitializeFacetMap(DataFatturaType._CF_minInclusive)
 Namespace.addCategoryObject('typeBinding', 'DataFatturaType', DataFatturaType)
 _module_typeBindings.DataFatturaType = DataFatturaType

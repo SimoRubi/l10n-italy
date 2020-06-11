@@ -3,8 +3,8 @@
 ## Istruzioni per generazione nuovi bindings
 
 * Scaricare il relativo xsd in locale o copiare il file che si trova nella cartella xsd
-* Generare i bindings utilizzando: `pyxbgen https://www.agenziaentrate.gov.it/portale/documents/20143/2451019/Schema_VFPR12_29052020.xsd`
-* Rimuovere i riferimenti locali dai file py con il comando (adattando l'url se differente):
+* Generare i bindings utilizzando: `pyxbgen <link>`
+* sostituire nei file diff il _GenerationUID con quello creato da pyxbgen
 * in cima ai files generati sostiture le righe:
   ```
   # ./_ds.py
