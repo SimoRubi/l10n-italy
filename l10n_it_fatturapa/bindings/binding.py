@@ -271,14 +271,9 @@ TipoDocumentoType.TD24 = TipoDocumentoType._CF_enumeration.addEnumeration(unicod
 TipoDocumentoType.TD25 = TipoDocumentoType._CF_enumeration.addEnumeration(unicode_value='TD25', tag='TD25')
 TipoDocumentoType.TD26 = TipoDocumentoType._CF_enumeration.addEnumeration(unicode_value='TD26', tag='TD26')
 TipoDocumentoType.TD27 = TipoDocumentoType._CF_enumeration.addEnumeration(unicode_value='TD27', tag='TD27')
-<<<<<<< HEAD
-TipoDocumentoType._InitializeFacetMap(TipoDocumentoType._CF_length,
-   TipoDocumentoType._CF_enumeration)
-=======
 TipoDocumentoType._CF_length = pyxb.binding.facets.CF_length(value=pyxb.binding.datatypes.nonNegativeInteger(4))
 TipoDocumentoType._InitializeFacetMap(TipoDocumentoType._CF_enumeration,
    TipoDocumentoType._CF_length)
->>>>>>> 12.0-l10n_it_fatturapa-binding
 Namespace.addCategoryObject('typeBinding', 'TipoDocumentoType', TipoDocumentoType)
 _module_typeBindings.TipoDocumentoType = TipoDocumentoType
 
@@ -297,14 +292,9 @@ TipoRitenutaType.RT03 = TipoRitenutaType._CF_enumeration.addEnumeration(unicode_
 TipoRitenutaType.RT04 = TipoRitenutaType._CF_enumeration.addEnumeration(unicode_value='RT04', tag='RT04')
 TipoRitenutaType.RT05 = TipoRitenutaType._CF_enumeration.addEnumeration(unicode_value='RT05', tag='RT05')
 TipoRitenutaType.RT06 = TipoRitenutaType._CF_enumeration.addEnumeration(unicode_value='RT06', tag='RT06')
-<<<<<<< HEAD
-TipoRitenutaType._InitializeFacetMap(TipoRitenutaType._CF_length,
-   TipoRitenutaType._CF_enumeration)
-=======
 TipoRitenutaType._CF_length = pyxb.binding.facets.CF_length(value=pyxb.binding.datatypes.nonNegativeInteger(4))
 TipoRitenutaType._InitializeFacetMap(TipoRitenutaType._CF_enumeration,
    TipoRitenutaType._CF_length)
->>>>>>> 12.0-l10n_it_fatturapa-binding
 Namespace.addCategoryObject('typeBinding', 'TipoRitenutaType', TipoRitenutaType)
 _module_typeBindings.TipoRitenutaType = TipoRitenutaType
 
@@ -425,14 +415,9 @@ ModalitaPagamentoType.MP20 = ModalitaPagamentoType._CF_enumeration.addEnumeratio
 ModalitaPagamentoType.MP21 = ModalitaPagamentoType._CF_enumeration.addEnumeration(unicode_value='MP21', tag='MP21')
 ModalitaPagamentoType.MP22 = ModalitaPagamentoType._CF_enumeration.addEnumeration(unicode_value='MP22', tag='MP22')
 ModalitaPagamentoType.MP23 = ModalitaPagamentoType._CF_enumeration.addEnumeration(unicode_value='MP23', tag='MP23')
-<<<<<<< HEAD
-ModalitaPagamentoType._InitializeFacetMap(ModalitaPagamentoType._CF_length,
-   ModalitaPagamentoType._CF_enumeration)
-=======
 ModalitaPagamentoType._CF_length = pyxb.binding.facets.CF_length(value=pyxb.binding.datatypes.nonNegativeInteger(4))
 ModalitaPagamentoType._InitializeFacetMap(ModalitaPagamentoType._CF_enumeration,
    ModalitaPagamentoType._CF_length)
->>>>>>> 12.0-l10n_it_fatturapa-binding
 Namespace.addCategoryObject('typeBinding', 'ModalitaPagamentoType', ModalitaPagamentoType)
 _module_typeBindings.ModalitaPagamentoType = ModalitaPagamentoType
 
@@ -709,17 +694,10 @@ class String35LatinExtType (pyxb.binding.datatypes.normalizedString):
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'String35LatinExtType')
     _XSDLocation = pyxb.utils.utility.Location('https://www.fatturapa.gov.it/export/fatturazione/sdi/fatturapa/v1.3/Schema_del_file_xml_FatturaPA_versione_1.2.1.xsd', 1282, 2)
     _Documentation = None
-<<<<<<< HEAD
-String35LatinExtType._CF_minLength = pyxb.binding.facets.CF_minLength(value=pyxb.binding.datatypes.nonNegativeInteger(1))
-String35LatinExtType._CF_maxLength = pyxb.binding.facets.CF_maxLength(value=pyxb.binding.datatypes.nonNegativeInteger(35))
-String35LatinExtType._InitializeFacetMap(String35LatinExtType._CF_minLength,
-   String35LatinExtType._CF_maxLength)
-=======
 String35LatinExtType._CF_maxLength = pyxb.binding.facets.CF_maxLength(value=pyxb.binding.datatypes.nonNegativeInteger(35))
 String35LatinExtType._CF_minLength = pyxb.binding.facets.CF_minLength(value=pyxb.binding.datatypes.nonNegativeInteger(1))
 String35LatinExtType._InitializeFacetMap(String35LatinExtType._CF_maxLength,
    String35LatinExtType._CF_minLength)
->>>>>>> 12.0-l10n_it_fatturapa-binding
 Namespace.addCategoryObject('typeBinding', 'String35LatinExtType', String35LatinExtType)
 _module_typeBindings.String35LatinExtType = String35LatinExtType
 
