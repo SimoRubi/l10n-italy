@@ -30,7 +30,7 @@ index 7f239610..28ff679d 100644
 +except (ImportError) as err:
 +    _logger.debug(err)
  # Unique identifier for bindings created at the same time
- _GenerationUID = pyxb.utils.utility.UniqueIdentifier('urn:uuid:bf184436-abe3-11ea-89e6-e09467884037')
+ _GenerationUID = pyxb.utils.utility.UniqueIdentifier('urn:uuid:f33a6cc4-abea-11ea-89e6-e09467884037')
 
 @@ -25,8 +34,6 @@ if pyxb.__version__ != _PyXBVersion:
  # inside class definitions where property names may conflict.

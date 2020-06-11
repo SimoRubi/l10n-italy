@@ -1,7 +1,7 @@
 # ./_ds.py
 # -*- coding: utf-8 -*-
 # PyXB bindings for NM:f1c343a882e7a65fb879f4ee813309f8231f28c8
-# Generated 2020-06-11 15:30:32.851469 by PyXB version 1.2.6 using Python 3.6.9.final.0
+# Generated 2020-06-11 15:53:54.097617 by PyXB version 1.2.6 using Python 3.6.9.final.0
 # Namespace http://www.w3.org/2000/09/xmldsig# [xmlns:ds]
 
 from __future__ import unicode_literals
@@ -14,7 +14,7 @@ import pyxb.utils.domutils
 import sys
 import pyxb.utils.six as _six
 # Unique identifier for bindings created at the same time
-_GenerationUID = pyxb.utils.utility.UniqueIdentifier('urn:uuid:b028f4c6-abe7-11ea-89e6-e09467884037')
+_GenerationUID = pyxb.utils.utility.UniqueIdentifier('urn:uuid:f33a6cc4-abea-11ea-89e6-e09467884037')
 
 # Version of PyXB used to generate the bindings
 _PyXBVersion = '1.2.6'
