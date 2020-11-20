@@ -3,17 +3,19 @@
 # Copyright 2016  Alessio Gerace - Agile Business Group
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo.addons.account.tests.account_test_users import AccountTestUsers
+from odoo.addons.account.tests.test_account_account import TestAccountAccount
 
 
-class TestSP(AccountTestUsers):
+class TestSP(TestAccountAccount):
+
     def setUp(self):
         super(TestSP, self).setUp()
         self.tax_model = self.env["account.tax"]
-        self.invoice_model = self.env["account.invoice"]
+        self.move_model = self.env["account.move"]
         self.term_model = self.env["account.payment.term"]
-        self.inv_line_model = self.env["account.invoice.line"]
+        self.move_line_model = self.env["account.move.line"]
         self.fp_model = self.env["account.fiscal.position"]
+        self.account_model = self.env['account.account']
         self.tax22sp = self.tax_model.create(
             {
                 "name": "22% SP",
@@ -102,14 +104,14 @@ class TestSP(AccountTestUsers):
         # Set invoice date to recent date in the system
         # This solves problems with account_invoice_sequential_dates
         self.recent_date = self.invoice_model.search(
-            [("date_invoice", "!=", False)], order="date_invoice desc", limit=1
-        ).date_invoice
+            [("invoice_date", "!=", False)], order="invoice_date desc", limit=1
+        ).invoice_date
 
     def test_invoice(self):
         self.assertTrue(self.tax22sp.is_split_payment)
         invoice = self.invoice_model.create(
             {
-                "date_invoice": self.recent_date,
+                "invoice_date": self.recent_date,
                 "partner_id": self.env.ref("base.res_partner_3").id,
                 "journal_id": self.sales_journal.id,
                 "account_id": self.a_recv.id,
@@ -190,12 +192,12 @@ class TestSP(AccountTestUsers):
         # refund
         invoice3 = self.invoice_model.create(
             {
-                "date_invoice": self.recent_date,
+                "invoice_date": self.recent_date,
                 "partner_id": self.env.ref("base.res_partner_3").id,
                 "journal_id": self.sales_journal.id,
                 "account_id": self.a_recv.id,
                 "fiscal_position_id": self.sp_fp.id,
-                "type": "out_refund",
+                "move_type": "out_refund",
                 "invoice_line_ids": [
                     (
                         0,
