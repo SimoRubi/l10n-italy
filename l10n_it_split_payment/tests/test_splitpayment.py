@@ -7,7 +7,6 @@ from odoo.addons.account.tests.test_account_account import TestAccountAccount
 
 
 class TestSP(TestAccountAccount):
-
     def setUp(self):
         super(TestSP, self).setUp()
         self.tax_model = self.env["account.tax"]
@@ -15,7 +14,9 @@ class TestSP(TestAccountAccount):
         self.term_model = self.env["account.payment.term"]
         self.move_line_model = self.env["account.move.line"]
         self.fp_model = self.env["account.fiscal.position"]
-        self.account_model = self.env['account.account']
+        self.account_model = self.env["account.account"]
+
+        self.company = self.env.user.company_id
         self.tax22sp = self.tax_model.create(
             {
                 "name": "22% SP",
@@ -41,7 +42,6 @@ class TestSP(TestAccountAccount):
                 ],
             }
         )
-        self.company = self.env.ref("base.main_company")
         self.company.sp_account_id = self.env["account.account"].search(
             [
                 (
@@ -53,7 +53,7 @@ class TestSP(TestAccountAccount):
             limit=1,
         )
         account_user_type = self.env.ref("account.data_account_type_receivable")
-        self.a_recv = self.account_model.sudo(self.account_manager.id).create(
+        self.a_recv = self.account_model.create(
             dict(
                 code="cust_acc",
                 name="customer account",
@@ -72,9 +72,8 @@ class TestSP(TestAccountAccount):
             limit=1,
         )
         self.sales_journal = self.env["account.journal"].search(
-            [("type", "=", "sale")]
+            [("type", "=", "sale"), ("company_id", "=", self.company.id)]
         )[0]
-        self.sales_journal.update_posted = True
         self.term_15_30 = self.term_model.create(
             {
                 "name": "15 30",
@@ -103,18 +102,17 @@ class TestSP(TestAccountAccount):
         )
         # Set invoice date to recent date in the system
         # This solves problems with account_invoice_sequential_dates
-        self.recent_date = self.invoice_model.search(
+        self.recent_date = self.move_model.search(
             [("invoice_date", "!=", False)], order="invoice_date desc", limit=1
         ).invoice_date
 
     def test_invoice(self):
         self.assertTrue(self.tax22sp.is_split_payment)
-        invoice = self.invoice_model.create(
+        invoice = self.move_model.with_context(default_move_type="out_invoice").create(
             {
                 "invoice_date": self.recent_date,
                 "partner_id": self.env.ref("base.res_partner_3").id,
                 "journal_id": self.sales_journal.id,
-                "account_id": self.a_recv.id,
                 "fiscal_position_id": self.sp_fp.id,
                 "invoice_line_ids": [
                     (
@@ -125,21 +123,21 @@ class TestSP(TestAccountAccount):
                             "account_id": self.a_sale.id,
                             "quantity": 1,
                             "price_unit": 100,
-                            "invoice_line_tax_ids": [(6, 0, {self.tax22sp.id})],
+                            "tax_ids": [(6, 0, {self.tax22sp.id})],
                         },
                     )
                 ],
             }
         )
         self.assertTrue(invoice.split_payment)
-        invoice.action_invoice_open()
+        invoice.action_post()
         self.assertEqual(invoice.amount_sp, 22)
         self.assertEqual(invoice.amount_total, 100)
-        self.assertEqual(invoice.residual, 100)
+        self.assertEqual(invoice.amount_residual, 100)
         self.assertEqual(invoice.amount_tax, 0)
         vat_line = False
         credit_line = False
-        for line in invoice.move_id.line_ids:
+        for line in invoice.line_ids:
             if line.account_id.id == self.company.sp_account_id.id:
                 vat_line = True
                 self.assertEqual(line.debit, 22)
@@ -150,11 +148,10 @@ class TestSP(TestAccountAccount):
         self.assertTrue(credit_line)
         invoice.action_cancel()
 
-        invoice2 = self.invoice_model.create(
+        invoice2 = self.move_model.with_context(default_move_type="out_invoice").create(
             {
                 "partner_id": self.env.ref("base.res_partner_3").id,
                 "journal_id": self.sales_journal.id,
-                "account_id": self.a_recv.id,
                 "fiscal_position_id": self.sp_fp.id,
                 "payment_term_id": self.term_15_30.id,
                 "invoice_line_ids": [
@@ -166,20 +163,20 @@ class TestSP(TestAccountAccount):
                             "account_id": self.a_sale.id,
                             "quantity": 1,
                             "price_unit": 100,
-                            "invoice_line_tax_ids": [(6, 0, {self.tax22sp.id})],
+                            "tax_ids": [(6, 0, {self.tax22sp.id})],
                         },
                     )
                 ],
             }
         )
-        invoice2.action_invoice_open()
+        invoice2.action_post()
         self.assertEqual(invoice2.amount_sp, 22)
         self.assertEqual(invoice2.amount_total, 100)
-        self.assertEqual(invoice2.residual, 100)
+        self.assertEqual(invoice2.amount_residual, 100)
         self.assertEqual(invoice2.amount_tax, 0)
         vat_line = False
         credit_line_count = 0
-        for line in invoice2.move_id.line_ids:
+        for line in invoice2.line_ids:
             if line.account_id.id == self.company.sp_account_id.id:
                 vat_line = True
                 self.assertEqual(line.debit, 22)
@@ -190,12 +187,11 @@ class TestSP(TestAccountAccount):
         self.assertEqual(credit_line_count, 2)
 
         # refund
-        invoice3 = self.invoice_model.create(
+        invoice3 = self.move_model.with_context(default_move_type="out_invoice").create(
             {
                 "invoice_date": self.recent_date,
                 "partner_id": self.env.ref("base.res_partner_3").id,
                 "journal_id": self.sales_journal.id,
-                "account_id": self.a_recv.id,
                 "fiscal_position_id": self.sp_fp.id,
                 "move_type": "out_refund",
                 "invoice_line_ids": [
@@ -207,21 +203,21 @@ class TestSP(TestAccountAccount):
                             "account_id": self.a_sale.id,
                             "quantity": 1,
                             "price_unit": 100,
-                            "invoice_line_tax_ids": [(6, 0, {self.tax22sp.id})],
+                            "tax_ids": [(6, 0, {self.tax22sp.id})],
                         },
                     )
                 ],
             }
         )
         self.assertTrue(invoice3.split_payment)
-        invoice3.action_invoice_open()
+        invoice3.action_post()
         self.assertEqual(invoice3.amount_sp, 22)
         self.assertEqual(invoice3.amount_total, 100)
-        self.assertEqual(invoice3.residual, 100)
+        self.assertEqual(invoice3.amount_residual, 100)
         self.assertEqual(invoice3.amount_tax, 0)
         vat_line = False
         credit_line = False
-        for line in invoice3.move_id.line_ids:
+        for line in invoice3.line_ids:
             if line.account_id.id == self.company.sp_account_id.id:
                 vat_line = True
                 self.assertEqual(line.credit, 22)

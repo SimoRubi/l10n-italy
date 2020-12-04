@@ -77,9 +77,12 @@ class AccountMove(models.Model):
             self.invoice_line_ids.create(write_off_line_vals)
 
     def action_post(self):
-        if self.split_payment:
-            if self.move_type in ["in_invoice", "in_refund"]:
-                raise UserError(_("Can't handle supplier invoices with split payment"))
-            self._compute_split_payments()
+        for move in self:
+            if move.split_payment:
+                if move.move_type in ["in_invoice", "in_refund"]:
+                    raise UserError(
+                        _("Can't handle supplier invoices with split payment")
+                    )
+                move._compute_split_payments()
         res = super(AccountMove, self).action_post()
         return res
