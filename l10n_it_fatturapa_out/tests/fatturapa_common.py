@@ -114,7 +114,12 @@ class FatturaPACommon(AccountTestInvoicingCommon):
 
     def set_sequences(self, invoice_number, dt):
         seq_pool = self.env["ir.sequence"]
-        inv_seq = seq_pool.search([("name", "=", "INV Sequence")], limit=1)
+        inv_seq = seq_pool.search(
+            [
+                ("name", "=", "Customer Invoices : Check Number Sequence"),
+            ],
+            limit=1,
+        )
         seq_date = self.env["ir.sequence.date_range"].search(
             [
                 ("sequence_id", "=", inv_seq.id),
