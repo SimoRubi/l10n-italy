@@ -17,8 +17,6 @@ class FatturaPACommon(AccountTestInvoicingCommon):
         # used to be in AccountTestUsers
         self.account_model = self.env["account.account"]
 
-        # self.company = self.env.ref("base.main_company")
-        self.company = self.env["res.company"].browse(self.env.companies.ids[0])
         self.account_manager = mail_new_test_user(
             self.env,
             name="Adviser",
@@ -27,6 +25,8 @@ class FatturaPACommon(AccountTestInvoicingCommon):
             groups="account.group_account_manager,base.group_partner_manager",
             company_ids=[(6, 0, self.env.companies.ids)],
         )
+        self.env.user = self.account_manager
+        self.company = self.env.user.company_id
         self.wizard_model = self.env["wizard.export.fatturapa"]
         self.data_model = self.env["ir.model.data"]
         self.attach_model = self.env["fatturapa.attachment.out"]
@@ -67,9 +67,21 @@ class FatturaPACommon(AccountTestInvoicingCommon):
         self.product_product_10.barcode = False
         self.product_order_01.default_code = False
         self.product_order_01.barcode = False
-        self.tax_22 = self.env.ref("l10n_it_fatturapa.tax_22")
-        self.tax_10 = self.env.ref("l10n_it_fatturapa.tax_10")
-        self.tax_22_SP = self.env.ref("l10n_it_fatturapa.tax_22_SP")
+        self.tax_22 = (
+            self.env.ref("l10n_it_fatturapa.tax_22")
+            .sudo()
+            .copy({"company_id": self.company.id})
+        )
+        self.tax_10 = (
+            self.env.ref("l10n_it_fatturapa.tax_10")
+            .sudo()
+            .copy({"company_id": self.company.id})
+        )
+        self.tax_22_SP = (
+            self.env.ref("l10n_it_fatturapa.tax_22_SP")
+            .sudo()
+            .copy({"company_id": self.company.id})
+        )
         self.res_partner_fatturapa_0 = self.env.ref(
             "l10n_it_fatturapa.res_partner_fatturapa_0"
         )
