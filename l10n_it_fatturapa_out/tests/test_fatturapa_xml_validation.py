@@ -20,10 +20,21 @@ class TestDuplicatedAttachment(FatturaPACommon):
         # same transaction would fail.
         # Note that all the tests in TestFatturaPAXMLValidation
         # are executed in the same transaction.
-        self.attach_model.create({"name": "test_duplicated"})
+        self.attach_model.create(
+            {
+                "name": "test_duplicated",
+                "att_name": "test_duplicated",
+            }
+        )
         with self.assertRaises(IntegrityError) as ie:
             with mute_logger("odoo.sql_db"):
-                self.attach_model.create({"name": "test_duplicated"})
+                self.attach_model.create(
+                    {
+                        "name": "test_duplicated",
+                        "att_name": "test_duplicated",
+                    }
+                )
+                self.attach_model.create({"att_name": "test_duplicated"})
         self.assertEqual(ie.exception.pgcode, "23505")
 
 
