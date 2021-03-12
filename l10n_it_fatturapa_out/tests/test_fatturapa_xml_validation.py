@@ -473,7 +473,7 @@ class TestFatturaPAXMLValidation(FatturaPACommon):
         self.set_sequences(18, "2018-01-07")
         partner = self.res_partner_fatturapa_4
         partner.onchange_country_id_e_inv()
-        partner.write(partner._convert_to_write(partner._cache))
+        # partner.write(partner._convert_to_write(partner._cache))
         self.assertEqual(partner.codice_destinatario, "XXXXXXX")
         invoice = self.invoice_model.create(
             {
@@ -584,7 +584,7 @@ class TestFatturaPAXMLValidation(FatturaPACommon):
         partner.vat = "SI12345679"
         partner.fiscalcode = False
         partner.onchange_country_id_e_inv()
-        partner.write(partner._convert_to_write(partner._cache))
+        # partner.write(partner._convert_to_write(partner._cache))
         self.assertEqual(partner.codice_destinatario, "XXXXXXX")
         invoice = self.invoice_model.create(
             {
