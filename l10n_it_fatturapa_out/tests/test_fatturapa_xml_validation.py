@@ -85,7 +85,7 @@ class TestFatturaPAXMLValidation(FatturaPACommon):
                 ],
             }
         )
-        invoice.action_invoice_open()
+        invoice.action_post()
         self.assertFalse(self.attach_model.file_name_exists("00001"))
         res = self.run_wizard(invoice.id)
 
@@ -156,7 +156,7 @@ class TestFatturaPAXMLValidation(FatturaPACommon):
                 ],
             }
         )
-        invoice.action_invoice_open()
+        invoice.action_post()
         res = self.run_wizard(invoice.id)
         attachment = self.attach_model.browse(res["res_id"])
         self.set_e_invoice_file_id(attachment, "IT06363391001_00002.xml")
@@ -220,7 +220,7 @@ class TestFatturaPAXMLValidation(FatturaPACommon):
                 ],
             }
         )
-        invoice.action_invoice_open()
+        invoice.action_post()
         self.AttachFileToInvoice(invoice.id, "test1.pdf")
         self.AttachFileToInvoice(invoice.id, "test2.pdf")
         res = self.run_wizard(invoice.id)
@@ -273,7 +273,7 @@ class TestFatturaPAXMLValidation(FatturaPACommon):
                 ],
             }
         )
-        invoice.action_invoice_open()
+        invoice.action_post()
         res = self.run_wizard(invoice.id)
         attachment = self.attach_model.browse(res["res_id"])
         self.set_e_invoice_file_id(attachment, "IT06363391001_00004.xml")
@@ -311,7 +311,7 @@ class TestFatturaPAXMLValidation(FatturaPACommon):
                 ],
             }
         )
-        invoice.action_invoice_open()
+        invoice.action_post()
         res = self.run_wizard(invoice.id)
         attachment = self.attach_model.browse(res["res_id"])
         self.set_e_invoice_file_id(attachment, "IT03297040366_00005.xml")
@@ -362,7 +362,7 @@ class TestFatturaPAXMLValidation(FatturaPACommon):
                 ],
             }
         )
-        invoice.action_invoice_open()
+        invoice.action_post()
         res = self.run_wizard(invoice.id)
         attachment = self.attach_model.browse(res["res_id"])
         self.set_e_invoice_file_id(attachment, "IT06363391001_00006.xml")
@@ -408,7 +408,7 @@ class TestFatturaPAXMLValidation(FatturaPACommon):
                 ],
             }
         )
-        invoice.action_invoice_open()
+        invoice.action_post()
         res = self.run_wizard(invoice.id)
         attachment = self.attach_model.browse(res["res_id"])
         self.set_e_invoice_file_id(attachment, "CHE114993395IVA_00007.xml")
@@ -460,7 +460,7 @@ class TestFatturaPAXMLValidation(FatturaPACommon):
                 ],
             }
         )
-        invoice.action_invoice_open()
+        invoice.action_post()
         res = self.run_wizard(invoice.id)
         attachment = self.attach_model.browse(res["res_id"])
         self.set_e_invoice_file_id(attachment, "IT06363391001_00008.xml")
@@ -515,7 +515,7 @@ class TestFatturaPAXMLValidation(FatturaPACommon):
                 ],
             }
         )
-        invoice.action_invoice_open()
+        invoice.action_post()
         res = self.run_wizard(invoice.id)
         attachment = self.attach_model.browse(res["res_id"])
         self.set_e_invoice_file_id(attachment, "IT06363391001_00009.xml")
@@ -562,7 +562,7 @@ class TestFatturaPAXMLValidation(FatturaPACommon):
                 ],
             }
         )
-        invoice.action_invoice_open()
+        invoice.action_post()
         res = self.run_wizard(invoice.id)
         attachment = self.attach_model.browse(res["res_id"])
         self.set_e_invoice_file_id(attachment, "IT06363391001_00010.xml")
@@ -626,7 +626,7 @@ class TestFatturaPAXMLValidation(FatturaPACommon):
                 ],
             }
         )
-        invoice.action_invoice_open()
+        invoice.action_post()
         res = self.run_wizard(invoice.id)
         attachment = self.attach_model.browse(res["res_id"])
         self.set_e_invoice_file_id(attachment, "IT06363391001_00011.xml")
@@ -677,7 +677,7 @@ class TestFatturaPAXMLValidation(FatturaPACommon):
                 ],
             }
         )
-        invoice.action_invoice_open()
+        invoice.action_post()
         res = self.run_wizard(invoice.id)
         attachment = self.attach_model.browse(res["res_id"])
         self.set_e_invoice_file_id(attachment, "IT06363391001_00012.xml")
