@@ -41,6 +41,11 @@ class TestDuplicatedAttachment(FatturaPACommon):
 class TestFatturaPAXMLValidation(FatturaPACommon):
     def setUp(self):
         super(TestFatturaPAXMLValidation, self).setUp()
+        self.company.partner_id.vat = "IT06363391001"
+        self.company.partner_id.name = "Azienda estera"
+        self.company.partner_id.city = "Lugano"
+        self.company.partner_id.state_id = False
+        self.company.partner_id.country_id = self.env.ref("base.it").id
 
     def test_1_xml_export(self):
         self.env.company.fatturapa_pub_administration_ref = "F000000111"
