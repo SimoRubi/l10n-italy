@@ -23,21 +23,6 @@ RESPONSE_MAIL_REGEX = (
 class FatturaPAAttachmentOut(models.Model):
     _inherit = "fatturapa.attachment.out"
 
-    state = fields.Selection(
-        [
-            ("ready", "Ready to Send"),
-            ("sent", "Sent"),
-            ("sender_error", "Sender Error"),
-            ("recipient_error", "Not delivered"),
-            ("rejected", "Rejected (PA)"),
-            ("validated", "Delivered"),
-            ("accepted", "Accepted"),
-        ],
-        string="State",
-        default="ready",
-        tracking=True,
-    )
-
     last_sdi_response = fields.Text(
         string="Last Response from Exchange System",
         default="No response yet",
